@@ -1,0 +1,29 @@
+{
+  "name": "rebellious",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hbi99/rebellious.git"
+  },
+  "author": "Hakan Bilgin",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/hbi99/rebellious/issues"
+  },
+  "homepage": "https://github.com/hbi99/rebellious#readme",
+  "devDependencies": {
+    "express": "^4.16.3"
+  },
+  "dependencies": {
+    "defiant.js": "^2.0.5",
+    "glob": "^7.1.2"
+  }
+}
