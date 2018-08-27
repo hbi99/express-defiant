@@ -1,34 +1,25 @@
 'use strict';
 
-var express = require('express')
-var rebellious = require('..')
+const express = require('express')
+const rebellious = require('..')
+const app = express()
 
-var app = express()
-
-
-app.use(rebellious.middleware({
+app.use(rebellious.mw({
 	viewPath: "./views"
-}))
+}));
 
 
-app.get('/', (ctx, res) => {
-	const data = {
-		"store": {
-			"book": [{
-				"title": "The Lord of the Rings",
-				"author": "J. R. R. Tolkien",
-				"category": "Fiction",
-				"price": 22.99,
-			   },
-			   {
-			   	"title": "Moby Dick",
-				"author": "Herman Melville",
-				"category": "Fiction",
-				"price": 8.99
-			   }]
-		   	}
-		};
-	ctx.render('index', data);
-})
+app.get('/books', (req, res, next) => {
+	const data = require('./json/books.json');
+	req.render('books', data);
+});
+
+app.get('/movies', (req, res, next) => {
+	req.render('movies');
+});
+
+app.get('/music', (req, res, next) => {
+	req.render('music');
+});
 
 app.listen(3000)

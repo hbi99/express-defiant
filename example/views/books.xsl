@@ -1,4 +1,4 @@
-<xsl:template name="index">
+<xsl:template name="books">
 	<h1>Books</h1>
 	<xsl:for-each select="//book">
 		<xsl:sort order="ascending" data-type="number" select="price"/>

@@ -1,0 +1,16 @@
+{
+"store": {
+	"book": [{
+			"title": "The Lord of the Rings",
+			"author": "J. R. R. Tolkien",
+			"category": "Fiction",
+			"price": 22.99
+	   },
+	   {
+		   	"title": "Moby Dick",
+			"author": "Herman Melville",
+			"category": "Fiction",
+			"price": 8.99
+	   }]
+   	}
+}
