@@ -10,7 +10,11 @@ app.use(rebellious.mw({
 
 
 app.get('/books', (req, res, next) => {
-	const data = require('./json/books.json');
+	const data = {
+		books: require('./json/books.json'),
+		author: require('./json/authors.json'),
+		category: require('./json/categories.json')
+	}
 	req.render('books', data);
 });
 

@@ -1,0 +1,8 @@
+{
+	"category": [
+		 { "id": 1, "name": "Fiction" },
+		 { "id": 2, "name": "Reference" },
+		 { "id": 3, "name": "Science Fiction" },
+		 { "id": 4, "name": "Fantasy" }
+	]
+}

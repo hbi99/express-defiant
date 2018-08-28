@@ -24,14 +24,21 @@ const rebellious = {
 			next();
 		}
 	},
-	register_templates: async () => {
+	register_templates: async (event) => {
+		if (typeof event === 'string') return;
 		const files = await common.getFiles(rebellious.settings.viewPath);
 		const xslt = await Promise.all(files.map(file => common.getFile(file)));
 
 		await defiant.register_template(xslt.join("\n"));
 	},
 	render: async (name, data) => {
-		const body = await defiant.render(name, data);
+		let body;
+		try {
+			body = await defiant.render(name, data);
+		} catch (err) {
+			body = "error: "+ err.toString();
+		}
+
 		rebellious.res.send(body);
 	}
 };

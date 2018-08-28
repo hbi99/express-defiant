@@ -1,16 +1,53 @@
 {
-"store": {
-	"book": [{
-			"title": "The Lord of the Rings",
-			"author": "J. R. R. Tolkien",
-			"category": "Fiction",
-			"price": 22.99
-	   },
-	   {
-		   	"title": "Moby Dick",
-			"author": "Herman Melville",
-			"category": "Fiction",
+	"book": [
+		{
+			"title": "Sword of Honour",
+			"category_id": 1,
+			"author_id": 1,
+			"price": 12.99
+		 },
+		 {
+			"title": "Moby Dick",
+			"category_id": 1,
+			"author_id": 2,
+			"isbn": "0-553-21311-3",
 			"price": 8.99
-	   }]
-   	}
+		 },
+		 {
+			"title": "Sayings of the Century",
+			"category_id": 2,
+			"author_id": 3,
+			"price": 8.95
+		 },
+		 {
+			"title": "The Lord of the Rings",
+			"category_id": 1,
+			"author_id": 4,
+			"price": 22.99
+		 },
+		 {
+			"title": "I, robot",
+			"category_id": 3,
+			"author_id": 5,
+			"price": 22.99
+		 },
+		 {
+			"title": "Foundation and Empire",
+			"category_id": 3,
+			"author_id": 5,
+			"price": 22.99
+		 },
+		 {
+			"title": "The Hobbit",
+			"category_id": 4,
+			"author_id": 4,
+			"price": 25.50
+		 },
+		 {
+			"title": "Nemesis",
+			"category_id": 3,
+			"author_id": 5,
+			"price": 12.19
+		 }
+	]
 }

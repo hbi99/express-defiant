@@ -1,0 +1,24 @@
+{
+	"author": [
+		{
+			"id": 1,
+			"name": "Evelyn Waugh"
+		 },
+		 {
+			"id": 2,
+			"name": "Herman Melville"
+		 },
+		 {
+			"id": 3,
+			"name": "Nigel Rees"
+		 },
+		 {
+			"id": 4,
+			"name": "J. R. R. Tolkien"
+		 },
+		 {
+			"id": 5,
+			"name": "Isaac Asimov"
+		 }
+	]
+}
