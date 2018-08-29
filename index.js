@@ -2,30 +2,29 @@
 
 const defiant = require("defiant.js");
 const common = require("./src/common");
+const chokidar = require("chokidar");
 
 const rebellious = {
 	mw: (settings) => {
-		rebellious.settings = settings;
-
-		const chokidar = require('chokidar');
-		chokidar
-			.watch('./views/*.{xsl,xslt}', {ignored: /(^|[\/\\])\../})
-			.on('add', rebellious.register_templates)
-			.on('unlink', rebellious.register_templates)
-			.on('change', rebellious.register_templates);
 
 		(async () => {
-			await rebellious.register_templates(settings);
+			rebellious.settings = settings;
+			await rebellious.registerTemplates();
+
+			chokidar
+				.watch(`${rebellious.settings.viewPath}/*.{xsl,xslt}`, {ignored: /(^|[\/\\])\../})
+				.on("unlink", rebellious.registerTemplates)
+				.on("change", rebellious.registerTemplates);
 		})();
 
 		return (req, res, next) => {
 			req.render = rebellious.render;
+			rebellious.req = req;
 			rebellious.res = res;
 			next();
 		}
 	},
-	register_templates: async (event) => {
-		if (typeof event === 'string') return;
+	registerTemplates: async (event) => {
 		const files = await common.getFiles(rebellious.settings.viewPath);
 		const xslt = await Promise.all(files.map(file => common.getFile(file)));
 
@@ -33,10 +32,15 @@ const rebellious = {
 	},
 	render: async (name, data) => {
 		let body;
-		try {
-			body = await defiant.render(name, data);
-		} catch (err) {
-			body = "error: "+ err.toString();
+		
+		if (rebellious.req.query.debug === 'true') {
+			body = await common.getFile(`${__dirname}/debug/debug.min.htm`);
+		} else {
+			try {
+				body = await defiant.render(name, data);
+			} catch (err) {
+				body = "error: "+ err.toString();
+			}
 		}
 
 		rebellious.res.send(body);

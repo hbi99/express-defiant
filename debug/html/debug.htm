@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Rebellious</title>
+<style>
+	@@include('../css/debug.min.css')
+</style>
+<script type="text/javascript">
+	@@include('../js/debug.min.js')
+</script>
+</head>
+<body>
+
+<div class="layout">
+
+	<section class="xslt-view">
+		<textarea>
+<xsl:template name="books">
+	<h1>Books</h1>
+	<xsl:for-each select="//book">
+		<xsl:sort order="ascending" data-type="number" select="price"/>
+		<h2><xsl:value-of select="title"/></h2>
+		Author: <strong><xsl:value-of select="//author[id = current()/author_id]/name"/></strong><br/>
+		Category: <xsl:value-of select="//category[id = current()/category_id]/name"/><br/>
+		Price: <xsl:value-of select="price"/>
+	</xsl:for-each>
+</xsl:template>
+		</textarea>
+	</section>
+
+	<section class="json-view">
+		<textarea>
+{
+  "@context": {
+    "name": "http://schema.org/name",
+    "description": "http://schema.org/description",
+    "image": {
+      "@id": "http://schema.org/image",
+      "@type": "@id"
+    },
+    "geo": "http://schema.org/geo",
+    "latitude": {
+      "@id": "http://schema.org/latitude",
+      "@type": "xsd:float"
+    },
+    "longitude": {
+      "@id": "http://schema.org/longitude",
+      "@type": "xsd:float"
+    },
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "name": "The Empire State Building",
+  "description": "The Empire State Building is a 102-story landmark in New York City.",
+  "image": "http://www.civil.usherbrooke.ca/cours/gci215a/empire-state-building.jpg",
+  "geo": {
+    "latitude": "40.75",
+    "longitude": "73.98"
+  }
+}
+		</textarea>
+	</section>
+
+</div>
+
+</body>
+</html>

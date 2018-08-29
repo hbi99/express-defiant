@@ -1,0 +1,54 @@
+
+@import "mixins.less";
+@import "reset.less";
+@import "codemirror.less";
+@import "cm-theme.less";
+
+* {
+	-webkit-box-sizing: border-box; 
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html, body {
+	height: 100%;
+}
+
+body {
+	background: #222;
+	color: #ccc;
+}
+
+.layout {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	display: flex;
+	flex-direction: row;
+
+	section {
+		background: rgba(0,0,0,0.1);
+		border: 1px solid rgba(255,255,255,0.1);
+		border-radius: 5px;
+		flex: 1 50%;
+		margin: 10px;
+		overflow: hidden;
+
+		&:nth-child(1) {
+			margin-right: 5px;
+		}
+		&:nth-child(2) {
+			margin-left: 5px;
+		}
+
+		.CodeMirror {
+			height: 100%;
+			font-family: 'Source Code Pro', Menlo, Consolas, Monaco, monospace;
+			font-size: 14px;
+			line-height: 1.35em;
+		}
+	}
+}
