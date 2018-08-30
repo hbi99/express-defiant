@@ -16,6 +16,7 @@ var include_options = {
 		basepath  : '@file'
 	},
 	srcPaths = {
+		watch   : ['debug/**/*.*', '!debug/**/*.min.*'],
 		html    : ['debug/html/*.{html,htm}'],
 		scripts : ['debug/js/debug.js', '!debug/js/*.min.js'],
 		styles  : ['debug/css/debug.less']
@@ -78,12 +79,12 @@ gulp.task('styles', function() {
 
 // Watch source files and moves them accordingly
 gulp.task('watch', function() {
-	gulp.watch([srcPaths.html, srcPaths.scripts, srcPaths.styles],    ['build']);
+	gulp.watch(srcPaths.watch, ['build']);
 });
 
 // This task is for building for platforms
 gulp.task('devbuild', function(cb) {
-	sequence(['scripts', 'styles'], 'html', 'watch', cb);
+	sequence(['build'], 'watch', cb);
 });
 
 // This task is for building for platforms

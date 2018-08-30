@@ -1,8 +1,11 @@
 
+@import "variables.less";
 @import "mixins.less";
 @import "reset.less";
 @import "codemirror.less";
 @import "cm-theme.less";
+
+
 
 * {
 	-webkit-box-sizing: border-box; 
@@ -16,7 +19,9 @@ html, body {
 }
 
 body {
-	background: #222;
+	cursor: default;
+	background-color: @boxBgColor;
+	background-image: @appBg;
 	color: #ccc;
 }
 
@@ -26,29 +31,46 @@ body {
 	left: 0px;
 	right: 0px;
 	bottom: 0px;
+	padding: 7px;
 	display: flex;
 	flex-direction: row;
 
+	.divider-vertical {
+		//background: red;
+		position: relative;
+		z-index: 99;
+		flex: 1 4px;
+		cursor: ew-resize;
+	}
+
 	section {
-		background: rgba(0,0,0,0.1);
-		border: 1px solid rgba(255,255,255,0.1);
+		background: @boxFace;
+		position: relative;
 		border-radius: 5px;
 		flex: 1 50%;
-		margin: 10px;
+		padding: 29px 3px 3px 3px;
 		overflow: hidden;
 
-		&:nth-child(1) {
-			margin-right: 5px;
-		}
-		&:nth-child(2) {
-			margin-left: 5px;
-		}
-
 		.CodeMirror {
+			background: @boxContent;
+			color: @appFg;
 			height: 100%;
 			font-family: 'Source Code Pro', Menlo, Consolas, Monaco, monospace;
 			font-size: 14px;
 			line-height: 1.35em;
+			border-radius: 4px;
+
+			.CodeMirror-gutters {
+				background: @boxContent;
+				border-right: 0px;
+			}
+			.CodeMirror-linenumbers {
+				background: lighten(@boxContent, 1%);
+			}
+			.CodeMirror-linenumber {
+				color: lighten(@boxFace, 3%);
+				padding: 0 7px 0 11px;
+			}
 		}
 	}
 }
