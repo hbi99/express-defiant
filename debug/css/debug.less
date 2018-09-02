@@ -23,6 +23,10 @@ body {
 	background-color: @boxBgColor;
 	background-image: @appBg;
 	color: #ccc;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 13px;
+	// -webkit-font-smoothing: antialiased;
+	// -moz-osx-font-smoothing: grayscale;
 }
 
 .layout {
@@ -48,28 +52,43 @@ body {
 		position: relative;
 		border-radius: 5px;
 		flex: 1 50%;
-		padding: 29px 3px 3px 3px;
+		padding: 29px 5px 5px 5px;
 		overflow: hidden;
 
-		.CodeMirror {
-			background: @boxContent;
-			color: @appFg;
-			height: 100%;
-			font-family: 'Source Code Pro', Menlo, Consolas, Monaco, monospace;
-			font-size: 14px;
-			line-height: 1.35em;
-			border-radius: 4px;
+		&.json-view .tabbar > span {
+			width: 100%;
+		}
 
-			.CodeMirror-gutters {
-				background: @boxContent;
-				border-right: 0px;
-			}
-			.CodeMirror-linenumbers {
-				background: lighten(@boxContent, 1%);
-			}
-			.CodeMirror-linenumber {
-				color: lighten(@boxFace, 3%);
-				padding: 0 7px 0 11px;
+		.tabbar {
+			position: absolute;
+			top: 5px;
+			left: 5px;
+			right: 5px;
+			height: 29px;
+			z-index: 1;
+			font-size: 12px;
+
+			> span {
+				float: left;
+				padding: 8px 31px 0px 11px;
+				height: 29px;
+				border-radius: 3px 3px 0px 0px;
+				margin-right: 1px;
+				text-shadow: 0px 1px 0px rgba(0,0,0,0.75);
+				color: darken(@boxTitle, 17%);
+				cursor: pointer;
+				.transition(80ms);
+
+				&:hover {
+					color: @boxTitle;
+				}
+				
+				&.active {
+					padding-top: 7px;
+					background: lighten(@boxFace, 7%);
+					color: @boxTitle;
+					cursor: default;
+				}
 			}
 		}
 	}
