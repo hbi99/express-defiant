@@ -13,90 +13,30 @@
 <body>
 
 <div class="layout">
+	<div class="toolbar"></div>
 
-   <section class="xslt-view">
-   	<div class="tabbar">
-   		<span class="active">books.xsl</span>
-   		<span>categories.xsl</span>
-   		<span>authors.xsl</span>
-   	</div>
-      <textarea>
-<xsl:template name="books">
-   <h1>Books</h1>
-   
-   <xsl:value-of select="//book[4]/category_id"/>
-   <xsl:value-of select="//book[last()]"/>
-   <xsl:value-of select="//*[category_id=1]"/>
-   <xsl:value-of select="//*[category_id=2]/title"/>
-   <xsl:value-of select="//isbn"/>
-   <xsl:value-of select="//title/text()"/>
-   <xsl:value-of select="//*[price > 15]"/>
-   <xsl:value-of select="//*[contains(title, 'the')]"/>
-   <xsl:value-of select="//book[position() < 3]"/>
+	<div class="editors">
+	   <section class="xslt-view">
+	   	<div class="tabbar">
+	   		<span class="active">books.xsl</span>
+	   		<span>categories.xsl</span>
+	   		<span>authors.xsl</span>
+	   	</div>
+	      <textarea>@@include('../../example/views/tests.xsl')</textarea>
+	   </section>
 
-</xsl:template>
-      </textarea>
-   </section>
+	   <div class="divider-vertical"></div>
 
-   <div class="divider-vertical"></div>
+	   <section class="json-view">
+	   	<div class="tabbar">
+	   		<span class="active">data.json</span>
+	   		<input type="text" name="xpath" />
+	   	</div>
+	      <textarea>@@include('../../example/json/books.json')</textarea>
+	   </section>
+	</div>
 
-   <section class="json-view">
-   	<div class="tabbar">
-   		<span class="active">data.json</span>
-
-   		<input type="text" name="xpath" />
-   	</div>
-      <textarea>
-{
-   "book": [
-      {
-         "title": "Sword of Honour",
-         "category_id": 1,
-         "author_id": 1,
-         "price": 12.99
-      },
-      {
-         "title": "Moby Dick",
-         "category_id": 1,
-         "author_id": 2,
-         "isbn": "0-553-21311-3",
-         "price": 8.99
-      },
-      {
-         "title": "Sayings of the Century",
-         "category_id": 2,
-         "author_id": 3,
-         "price": 8.95
-      },
-      {
-         "title": "The Lord of the Rings",
-         "category_id": 1,
-         "author_id": 4,
-         "price": 22.99
-      },
-      {
-         "title": "I, robot",
-         "category_id": 3,
-         "author_id": 5,
-         "price": 22.99
-      },
-      {
-         "title": "Foundation and Empire",
-         "category_id": 3,
-         "author_id": 5,
-         "price": 22.99
-      },
-      {
-         "title": "The Hobbit",
-         "category_id": 4,
-         "author_id": 4,
-         "price": 25.50
-      }
-   ]
-}
-      </textarea>
-   </section>
-
+	<div class="footer"></div>
 </div>
 
 </body>
