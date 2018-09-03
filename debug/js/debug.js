@@ -98,6 +98,9 @@
 						event.type = 'cursorActivity';
 						self.doEvent(event);
 					});
+
+					self.leftEditor.focus();
+					self.leftEditor.setCursor({line: 3, ch: 27});
 					break;
 				case 'clear-left-markers':
 					self.leftEditor.markers.map(m => m.clear());
@@ -116,7 +119,7 @@
 					} catch (err) {
 						return;
 					}
-
+					
       				self.doEvent('clear-right-markers');
 					editor = self.rightEditor;
 
