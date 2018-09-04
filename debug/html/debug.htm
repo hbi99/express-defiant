@@ -12,17 +12,28 @@
 </head>
 <body>
 
+<div class="hidden">
+	@@include('../svg/svg-symbols.svg')
+</div>
+
 <div class="layout">
-	<div class="toolbar"></div>
+	<div class="toolbar">
+		<svg class="symbol-xml"><use xlink:href="#symbol-xml" /></svg>
+	</div>
 
 	<div class="editors">
 	   <section class="xslt-view">
 	   	<div class="tabbar">
 	   		<span class="active">books.xsl</span>
 	   		<span>categories.xsl</span>
-	   		<span>authors.xsl</span>
 	   	</div>
+	      
 	      <textarea>@@include('../../example/views/tests.xsl')</textarea>
+	      
+	      <div class="view-foot">
+	      	<span class="btn-gutter on">g</span>
+	      	<span class="btn-fontsize">f</span>
+	      </div>
 	   </section>
 
 	   <div class="divider-vertical"></div>
@@ -30,13 +41,35 @@
 	   <section class="json-view">
 	   	<div class="tabbar">
 	   		<span class="active">data.json</span>
-	   		<input type="text" name="xpath" />
 	   	</div>
+
 	      <textarea>@@include('../../example/json/books.json')</textarea>
+
+	      <div class="view-foot">
+	      	<span class="btn-gutter on">g</span>
+	      	<span class="btn-fontsize">f</span>
+
+	      	<div class="sel-options">
+	      		<span>json</span>
+					<svg class="symbol-sort"><use xlink:href="#symbol-sort" /></svg>
+	      		<ul>
+	      			<li class="active">json</li>
+	      			<li>xml</li>
+	      		</ul>
+	      	</div>
 	   </section>
 	</div>
 
-	<div class="footer"></div>
+	<div class="footer">
+		<span class="btn-circle">
+			<svg class="symbol-play"><use xlink:href="#symbol-play" /></svg>
+		</span>
+		<div class="statusbar">
+			<div class="content">
+				Some text goes here...
+			</div>
+		</div>
+	</div>
 </div>
 
 </body>

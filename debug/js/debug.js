@@ -100,7 +100,7 @@
 					});
 
 					self.leftEditor.focus();
-					self.leftEditor.setCursor({line: 3, ch: 27});
+					self.leftEditor.setCursor({line: 7, ch: 27});
 					break;
 				case 'clear-left-markers':
 					self.leftEditor.markers.map(m => m.clear());

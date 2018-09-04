@@ -29,6 +29,41 @@ body {
 	// -moz-osx-font-smoothing: grayscale;
 }
 
+.hidden {
+	display: none;
+}
+
+svg[class^="symbol-"],
+svg[class*=" symbol-"] {
+	width: 18px;
+	height: 18px;
+	fill: #777;
+}
+
+.btn-circle {
+	display: block;
+	background: @boxFace;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+
+	&:hover {
+		svg {
+			fill: @boxFocusHl;
+		}
+	}
+
+	svg {
+		position: relative;
+		top: 5px;
+		left: 6px;
+		width: 15px;
+		height: 15px;
+		fill: @boxBgColor;
+		.transition(80ms);
+	}
+}
+
 .layout {
 	position: absolute;
 	top: 0px;
@@ -41,9 +76,6 @@ body {
 
 	.toolbar {
 		flex: 1 31px;
-	}
-	.footer {
-		flex: 3 31px;
 	}
 	.editors {
 		display: flex;
@@ -63,11 +95,11 @@ body {
 			position: relative;
 			border-radius: 5px;
 			flex: 1 50%;
-			padding: 29px 5px 5px 5px;
+			padding: 29px 5px 23px 5px;
 			overflow: hidden;
 
 			&.json-view .tabbar > span {
-				width: 100%;
+			//	width: 100%;
 			}
 
 			.tabbar {
@@ -98,9 +130,97 @@ body {
 						padding-top: 7px;
 						background: lighten(@boxFace, 7%);
 						color: @boxTitle;
+						//box-shadow: inset 0px 1px 0px lighten(@boxContent, 2%);
 						cursor: default;
 					}
 				}
+			}
+			.view-foot {
+				position: absolute;
+				bottom: 2px;
+				left: 5px;
+				right: 5px;
+				height: 17px;
+
+				> span {
+					background: @boxBgColor;
+					color: darken(@boxFocusHl, 19%);
+					float: left;
+					width: 17px;
+					height: 13px;
+					text-transform: uppercase;
+					text-align: center;
+					font-size: 9px;
+					font-family: Verdana;
+					font-weight: 600;
+					padding-top: 2px;
+					margin: 1px 2px 0 0;
+					cursor: pointer;
+
+					&.btn-gutter {
+						border-radius: 9px 0 0 9px;
+						padding-left: 1px;
+					}
+					&.btn-fontsize {
+						border-radius: 0 9px 9px 0;
+						padding-right: 1px;
+					}
+					&.on {
+						background: @boxFocusHl;
+						color: @boxFace;
+					//	text-shadow: 0px 1px 0px rgba(0,0,0,0.35);
+					}
+				}
+			}
+			.sel-options {
+				background: @boxBgColor;
+				color: @boxFocusHl;
+				float: right;
+				position: relative;
+				font-size: 11px;
+				padding: 2px 9px 0;
+				height: 15px;
+				margin-right: 14px;
+				border-radius: 2px;
+
+				.symbol-sort {
+					position: absolute;
+					top: 2px;
+					right: -13px;
+					width: 11px;
+					height: 11px;
+					filter: drop-shadow( 0px 1px 0px rgba(0,0,0,0.35) );
+				}
+
+				ul {
+					display: none;
+				}
+			}
+		}
+	}
+	.footer {
+		flex: 3 35px;
+		position: relative;
+		padding-top: 5px;
+
+		.statusbar {
+			background: @boxFace;
+			position: absolute;
+			top: 3px;
+			bottom: 0px;
+			left: 29px;
+			right: 0px;
+			padding: 3px;
+			border-radius: 5px;
+
+			.content {
+				background: @boxContent;
+				border-radius: 3px;
+				height: 100%;
+				padding: 6px 6px;
+				font-size: 12px;
+				text-shadow: 0px 1px 0px rgba(0,0,0,0.75);
+				box-shadow: inset 0px 1px 0px lighten(@boxContent, 5%);
 			}
 		}
 	}

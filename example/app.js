@@ -5,7 +5,8 @@ const rebellious = require('..')
 const app = express()
 
 app.use(rebellious.mw({
-	viewPath: "./views"
+	viewPath: './views',
+	env: 'dev'
 }));
 
 

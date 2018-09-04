@@ -2,7 +2,7 @@
 @import "variables.less";
 
 .CodeMirror {
-	background: @boxContent;
+	background: @boxEditor;
 	position: relative;
 	z-index: 2;
 	height: 100%;
@@ -16,11 +16,11 @@
 }
 
 .CodeMirror-gutters {
-	background: @boxContent;
-	border-right: 1px solid lighten(@boxContent, 3%);
+	background: @boxEditor;
+	border-right: 1px solid lighten(@boxEditor, 1%);
 }
 .CodeMirror-linenumbers {
-	background: lighten(@boxContent, 1%);
+	background: @boxEditor;
 }
 .CodeMirror-linenumber {
 	color: lighten(@boxFace, 3%);
@@ -41,8 +41,8 @@
 .cm-s-laura span.cm-variable-3 { color: #c33; }
 
 .cm-s-laura .CodeMirror-cursor { border-left: 1px solid #ddd; }
-.cm-s-laura div.CodeMirror-selected { background: #333; }
-.cm-s-laura .matched-xpath { background: #709; }
+.cm-s-laura div.CodeMirror-selected { background: rgba(255,255,255,0.1); }
+.cm-s-laura .matched-xpath { background: rgba(168,0,216,0.35); }
 
 
 /*
@@ -74,8 +74,8 @@
 .cm-s-emilia span.cm-variable-3 { color: #c33; }
 
 .cm-s-emilia .CodeMirror-cursor { border-left: 1px solid #ddd; }
-.cm-s-emilia div.CodeMirror-selected { background: #333; }
-.cm-s-emilia .matched-json { background: #507; }
+.cm-s-emilia div.CodeMirror-selected { background: rgba(255,255,255,0.1); }
+.cm-s-emilia .matched-json { background: rgba(173,0,243,0.35); }
 
 
 
