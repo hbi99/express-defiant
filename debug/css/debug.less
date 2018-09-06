@@ -4,6 +4,7 @@
 @import "reset.less";
 @import "codemirror.less";
 @import "cm-theme.less";
+@import "menu.less";
 
 
 
@@ -102,6 +103,11 @@ svg[class*=" symbol-"] {
 			//	width: 100%;
 			}
 
+			textarea {
+				display: none;
+			}
+			.cm-s-felicia.CodeMirror { display: none; }
+
 			.tabbar {
 				position: absolute;
 				top: 5px;
@@ -178,10 +184,23 @@ svg[class*=" symbol-"] {
 				float: right;
 				position: relative;
 				font-size: 11px;
-				padding: 2px 9px 0;
 				height: 15px;
 				margin-right: 14px;
 				border-radius: 2px;
+				.transition(80ms);
+
+				&:hover {
+					color: lighten(@boxFocusHl, 13%);
+
+					svg {
+						fill: lighten(@boxFocusHl, 13%);
+					}
+				}
+
+				.sel-value {
+					display: block;
+					padding: 2px 9px 0;
+				}
 
 				.symbol-sort {
 					position: absolute;
@@ -190,10 +209,7 @@ svg[class*=" symbol-"] {
 					width: 11px;
 					height: 11px;
 					filter: drop-shadow( 0px 1px 0px rgba(0,0,0,0.35) );
-				}
-
-				ul {
-					display: none;
+					.transition(80ms);
 				}
 			}
 		}

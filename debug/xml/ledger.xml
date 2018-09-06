@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+	<context tag_children="1">
+		<i for="workarea-canvas">
+			<i name="Design view" action="cvs -s mode_design" radioId="viewMode" checked="1"/>
+			<i name="Preview" action="cvs -s mode_preview" radioId="viewMode"/>
+			<i name="Code view" action="cvs -s mode_code" radioId="viewMode"/>
+			<i type="divider"/>
+			<i name="Files&#8230;">
+				<i name="Open file&#8230;" action="cvs -s open_file"/>
+				<i name="Save" action="cvs -s save_file"/>
+				<i type="divider"/>
+				<i name="HB animation" action="app -l 'res/xml/hb.xml'"/>
+				<i name="Hello" action="app -l 'res/xml/hello.xml'"/>
+			</i>
+			<i name="Fonts&#8230;">
+				<i name="Over the Rainbow" action="font -l 'Over the Rainbow'"/>
+				<i name="Condiment" action="font -l 'Condiment'"/>
+				<i name="Allura" action="font -l 'Allura'"/>
+				<i name="Engagement" action="font -l 'Engagement'"/>
+				<i name="Gochi Hand" action="font -l 'Gochi Hand'"/>
+				<i name="Parisienne" action="font -l 'Parisienne'"/>
+				<i name="Bad Script" action="font -l 'Bad Script'"/>
+				<i name="The Girl Next Door" action="font -l 'The Girl Next Door'"/>
+				<i name="Arizonia" action="font -l 'Arizonia'"/>
+			</i>
+			<i name="Show Developer Tools" action="sys -dev"/>
+			<i type="divider"/>
+			<i name="About&#8230;" action="popup -a 'app_about'"/>
+		</i>
+		<i for="tl_track">
+			<i name="Add brush" action=""/>
+			<i type="divider"/>
+			<i name="Show / Hide" action="timeline -s toggle_visible"/>
+			<i name="Expand / Collapse" action="timeline -s toggle_layer"/>
+			<i name="Delete track" action="timeline -s delete_track"/>
+		</i>
+		<i for="tl_anim_track">
+			<i name="Color&#8230;">
+				<i name="Purple" action="timeline -s change_track_color purple" />
+				<i name="Orange" action="timeline -s change_track_color orange" />
+				<i name="Maroon" action="timeline -s change_track_color maroon" />
+				<i name="Blue" action="timeline -s change_track_color blue" />
+				<i name="Yellow" action="timeline -s change_track_color yellow" />
+				<i name="Brown" action="timeline -s change_track_color brown" />
+				<i name="Khaki" action="timeline -s change_track_color khaki" />
+				<i name="Teal" action="timeline -s change_track_color teal" />
+				<i name="Green" action="timeline -s change_track_color green" />
+			</i>
+			<i type="divider"/>
+			<i name="Show / Hide" action="timeline -s toggle_visible"/>
+			<i name="Delete brush" action="timeline -s delete_track"/>
+		</i>
+	</context>
+</data>
