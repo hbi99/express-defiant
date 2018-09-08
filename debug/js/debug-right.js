@@ -12,7 +12,7 @@
 				lineWrapping: false,
 				lineNumbers: true,
 			});
-console.log(1);
+
 		this.jsonEditor.setOption('theme', 'emilia');
 		this.jsonEditor.markers = [];
 		this.xmlEditor.setOption('theme', 'felicia');

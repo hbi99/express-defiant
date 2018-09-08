@@ -132,12 +132,12 @@
 
 				// get menu node
 				xMenuItem = Defiant.node.selectSingleNode(self.ledger, '//*[@mId="'+ el.attr('data-mId') +'"]');
+
 				// execute shell command, if any
 				action = xMenuItem.getAttribute('action');
 				args = xMenuItem.getAttribute('args');
 				if (action) {
 					debug.shell.execute(action, args);
-					return;
 				}
 
 				// check group logic
@@ -195,6 +195,7 @@
 				// constaints
 				if (top + height + 11 > window.innerHeight) top -= height;
 				if (left + width > window.innerWidth) left -= (width - 6);
+
 				// position rendered menu
 				menu.css({
 					top: top +'px',
