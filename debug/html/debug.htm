@@ -27,6 +27,10 @@
 
 <div class="layout">
 	<div class="toolbar">
+		<!--
+		<span class="tool left" data-menu="right-editor">test</span>
+		<span class="tool right" data-menu="right-editor">test</span>
+		-->
 	</div>
 
 	<div class="editors" data-context="workarea-canvas">
@@ -58,7 +62,7 @@
 	      	<span class="btn-gutter on">g</span>
 	      	<span class="btn-fontsize">f</span>
 
-	      	<div class="sel-options">
+	      	<div class="sel-options" data-menu="right-editor">
 	      		<span class="sel-value">json</span>
 					<svg class="symbol-sort"><use xlink:href="#symbol-sort" /></svg>
 	      	</div>
@@ -81,9 +85,13 @@
 <div class="menus"><!--
 	<div class="context-menu">
 		<div class="cntnr">
-			<div class="menu-item" data-id="1">test </div>
+			<div class="menu-item hasSub" data-id="1">test
+				<svg class="symbol-play"><use xlink:href="#symbol-play" /></svg>
+			</div>
 			<div class="divider">&#160;</div>
-			<div class="menu-item" data-id="2">test 2</div>
+			<div class="menu-item checked" data-id="2">test 2
+				<svg class="symbol-check"><use xlink:href="#symbol-check" /></svg>
+			</div>
 		</div>
 	</div>-->
 </div>

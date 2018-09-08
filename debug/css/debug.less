@@ -30,6 +30,12 @@ body {
 	// -moz-osx-font-smoothing: grayscale;
 }
 
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
 .hidden {
 	display: none;
 }
@@ -76,7 +82,15 @@ svg[class*=" symbol-"] {
 	flex-direction: column;
 
 	.toolbar {
+		position: relative;
 		flex: 1 31px;
+
+		.tool {
+			width: 23px;
+			height: 23px;
+			background: silver;
+			color: #000;
+		}
 	}
 	.editors {
 		display: flex;
@@ -147,6 +161,7 @@ svg[class*=" symbol-"] {
 				left: 5px;
 				right: 5px;
 				height: 17px;
+				user-select: none;
 
 				> span {
 					background: @boxBgColor;
