@@ -88,7 +88,7 @@ svg[class*=" symbol-"] {
 		.tool {
 			width: 23px;
 			height: 23px;
-			background: silver;
+			background: #999;
 			color: #000;
 		}
 	}
@@ -117,10 +117,20 @@ svg[class*=" symbol-"] {
 			//	width: 100%;
 			}
 
-			textarea {
-				display: none;
+			.editor-container {
+				background: @boxEditor;
+				color: @boxText;
+				position: relative;
+				z-index: 2;
+				height: 100%;
+				border-radius: 3px 3px 4px 4px;
+				border-top: 2px solid lighten(@boxFace, 7%);
+				
+				textarea {
+					display: none;
+				}
+				.cm-s-felicia.CodeMirror { display: none; }
 			}
-			.cm-s-felicia.CodeMirror { display: none; }
 
 			.tabbar {
 				position: absolute;
@@ -204,6 +214,7 @@ svg[class*=" symbol-"] {
 				border-radius: 2px;
 				.transition(80ms);
 
+				&.active,
 				&:hover {
 					color: lighten(@boxFocusHl, 13%);
 

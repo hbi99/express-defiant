@@ -2,16 +2,12 @@
 @import "variables.less";
 
 .CodeMirror {
-	background: @boxEditor;
-	color: #888;
-	position: relative;
-	z-index: 2;
+	background: inherit;
+	color: inherit;
 	height: 100%;
 	font-family: 'Source Code Pro', Menlo, Consolas, Monaco, monospace;
 	font-size: 13px;
 	line-height: 1.4em;
-	border-radius: 3px 3px 4px 4px;
-	border-top: 2px solid lighten(@boxFace, 7%);
 
 	&.CodeMirror-focused {}
 }

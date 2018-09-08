@@ -33,14 +33,16 @@
 		-->
 	</div>
 
-	<div class="editors" data-context="workarea-canvas">
+	<div class="editors">
 	   <section class="xslt-view">
 	   	<div class="tabbar">
 	   		<span class="active">books.xsl</span>
 	   		<span>categories.xsl</span>
 	   	</div>
 	      
-	      <textarea>@@include('../../example/views/tests.xsl')</textarea>
+	      <div class="editor-container" data-context="left-editor">
+	      	<textarea>@@include('../../example/views/tests.xsl')</textarea>
+	      </div>
 	      
 	      <div class="view-foot">
 	      	<span class="btn-gutter on">g</span>
@@ -55,14 +57,16 @@
 	   		<span class="active">data.json</span>
 	   	</div>
 
-	      <textarea name="json-data">@@include('../../example/json/books.json')</textarea>
-	      <textarea name="xml-data"></textarea>
+	      <div class="editor-container" data-context="right-editor">
+		      <textarea name="json-data">@@include('../../example/json/books.json')</textarea>
+		      <textarea name="xml-data"></textarea>
+	      </div>
 
 	      <div class="view-foot">
 	      	<span class="btn-gutter on">g</span>
 	      	<span class="btn-fontsize">f</span>
 
-	      	<div class="sel-options" data-menu="right-editor">
+	      	<div class="sel-options" data-menu="right-editor-mode">
 	      		<span class="sel-value">json</span>
 					<svg class="symbol-sort"><use xlink:href="#symbol-sort" /></svg>
 	      	</div>

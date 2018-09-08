@@ -1,32 +1,43 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ledger>
+	<shell>
+		<i object="left" long="debug.left" type="">
+			<i switch="g" name="gutter" arg="[boolean]"/>
+			<i switch="f" name="fontSize" arg="[integer]"/>
+		</i>
+		<i object="right" long="debug.right" type="">
+			<i switch="g" name="gutter" arg="[boolean]"/>
+			<i switch="f" name="fontSize" arg="[integer]"/>
+			<i switch="m" name="mode" arg="[json|xml]"/>
+		</i>
+	</shell>
 	<contextmenu tag_children="1">
+		<menu for="left-editor">
+			<menu name="Show Gutter" action="" isChecked="1"/>
+			<menu name="Font size" invoke="font-size"/>
+			<menu type="divider"/>
+			<menu name="Autoselect XPath" isChecked="1"/>
+		</menu>
+
 		<menu for="right-editor">
-			<menu name="JSON data" action="view -m json" check-group="test" isChecked="1"/>
-			<menu name="XML data" action="view -m xml" check-group="test"/>
-		</menu>
-		<menu for="workarea-canvas">
-			<menu name="Add brush" invoke="tl_anim_track"/>
+			<menu name="Show Gutter" action="" isChecked="1"/>
+			<menu name="Font size" invoke="font-size"/>
 			<menu type="divider"/>
-			<menu name="Show / Hide" action="timeline -s toggle_visible"/>
-			<menu name="Expand / Collapse" action="timeline -s toggle_layer"/>
-			<menu name="Delete track" action="timeline -s delete_track"/>
+			<menu name="Mode&#8230;" invoke="right-editor-mode"/>
 		</menu>
-		<menu for="tl_anim_track">
-			<menu name="Color&#8230;">
-				<menu name="Purple" action="timeline -s change_track_color purple" />
-				<menu name="Orange" action="timeline -s change_track_color orange" />
-				<menu name="Maroon" action="timeline -s change_track_color maroon" />
-				<menu name="Blue" action="timeline -s change_track_color blue" />
-				<menu name="Yellow" action="timeline -s change_track_color yellow" />
-				<menu name="Brown" action="timeline -s change_track_color brown" />
-				<menu name="Khaki" action="timeline -s change_track_color khaki" />
-				<menu name="Teal" action="timeline -s change_track_color teal" />
-				<menu name="Green" action="timeline -s change_track_color green" />
-			</menu>
-			<menu type="divider"/>
-			<menu name="Show / Hide" action="timeline -s toggle_visible"/>
-			<menu name="Delete brush" action="timeline -s delete_track"/>
+		
+		<menu for="right-editor-mode">
+			<menu name="JSON data" action="view -m json" cg="rightEditorMode" isChecked="1"/>
+			<menu name="XML data" action="view -m xml" cg="rightEditorMode"/>
+		</menu>
+		
+		<menu for="font-size">
+			<menu name="12px" action="" cg="fontSize"/>
+			<menu name="13px" action="" isChecked="1" cg="fontSize"/>
+			<menu name="14px" action="" cg="fontSize"/>
+			<menu name="15px" action="" cg="fontSize"/>
+			<menu name="16px" action="" cg="fontSize"/>
+			<menu name="17px" action="" cg="fontSize"/>
 		</menu>
 	</contextmenu>
 </ledger>
