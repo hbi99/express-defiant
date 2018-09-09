@@ -18,13 +18,6 @@
 		this.processor = new XSLTProcessor();
 		this.processor.importStylesheet(this.templates);
 
-		// get ledger
-		str = this.body.find('script[type="debug/xml-ledger"]').text().trim();
-		this.ledger = Defiant.xmlFromString(str);
-
-		// makes sure that new menu items are tagged with ID's
-		this.tagIds(this.ledger);
-
 		// bind event handlers
 		this.root.on('mouseover mousedown', '.menu-item', this.doEvent)
 				.on('mousedown', this.doEvent);
@@ -35,7 +28,8 @@
 		});
 	},
 	doEvent: function(event) {
-		var self = debug.contextmenu,
+		var root = debug,
+			self = debug.context,
 			cmd = (typeof(event) === 'string')? event : event.type,
 			el = $(this),
 			pEl,
@@ -75,7 +69,7 @@
 				}
 
 				// get menu node
-				xMenuItem = Defiant.node.selectSingleNode(self.ledger, '//*[@mId="'+ el.attr('data-mId') +'"]');
+				xMenuItem = Defiant.node.selectSingleNode(root.ledger, '//*[@mId="'+ el.attr('data-mId') +'"]');
 
 				if (el.hasClass('hasSub')) {
 					invoke = xMenuItem.getAttribute('invoke');
@@ -131,21 +125,17 @@
 				self.doEvent('clear-contextmenu');
 
 				// get menu node
-				xMenuItem = Defiant.node.selectSingleNode(self.ledger, '//*[@mId="'+ el.attr('data-mId') +'"]');
+				xMenuItem = Defiant.node.selectSingleNode(root.ledger, '//*[@mId="'+ el.attr('data-mId') +'"]');
 
-				// execute shell command, if any
 				action = xMenuItem.getAttribute('action');
 				args = xMenuItem.getAttribute('args');
-				if (action) {
-					debug.shell.execute(action, args);
-				}
 
 				// check group logic
 				var cGroup = xMenuItem.getAttribute('cg'),
 					cSiblings,
 					cLen;
 				if (cGroup) {
-					cSiblings = Defiant.node.selectNodes(self.ledger, '//*[@cg="'+ cGroup +'"]');
+					cSiblings = Defiant.node.selectNodes(root.ledger, '//*[@cg="'+ cGroup +'"]');
 					cLen = cSiblings.length;
 					if (cLen > 1) {
 						while (cLen--) {
@@ -153,9 +143,19 @@
 							xMenuItem.setAttribute('isChecked', '1');
 						}
 					} else {
-						if (xMenuItem.getAttribute('isChecked') === '1') xMenuItem.removeAttribute('isChecked');
-						else xMenuItem.setAttribute('isChecked', 1);
+						if (xMenuItem.getAttribute('isChecked') === '1') {
+							if (!args) args = false;
+							xMenuItem.removeAttribute('isChecked');
+						} else {
+							if (!args) args = true;
+							xMenuItem.setAttribute('isChecked', 1);
+						}
 					}
+				}
+
+				// execute shell command, if any
+				if (action) {
+					debug.shell.execute(action, args);
 				}
 				break;
 			case 'contextmenu':
@@ -242,11 +242,6 @@
 				break;
 		}
 	},
-	tagIds: function(doc) {
-		var leafs = Defiant.node.selectNodes(doc, '//*[@tag_children]//*[not(@mId)]'),
-			now = Date.now();
-		leafs.map((item, i) => item.setAttribute('mId', 'c'+ now + i));
-	},
 	render: function(opt) {
 		var span = document.createElement('span'),
 			xpath = '//xsl:template[@name="'+ opt.template +'"]',
@@ -254,7 +249,7 @@
 			fragment;
 
 		template.setAttribute('match', opt.match);
-		fragment = this.processor.transformToFragment(this.ledger, document);
+		fragment = this.processor.transformToFragment(debug.ledger, document);
 		template.removeAttribute('match');
 
 		span.appendChild(fragment);

@@ -17,18 +17,19 @@
 			<menu name="Font size" invoke="font-size"/>
 			<menu type="divider"/>
 			<menu name="Autoselect XPath" isChecked="1"/>
+			<menu name="Version" action=""/>
 		</menu>
 
 		<menu for="right-editor">
-			<menu name="Show Gutter" action="" isChecked="1"/>
+			<menu name="Show Gutter" action="right -g" isChecked="1"/>
 			<menu name="Font size" invoke="font-size"/>
 			<menu type="divider"/>
 			<menu name="Mode&#8230;" invoke="right-editor-mode"/>
 		</menu>
 		
 		<menu for="right-editor-mode">
-			<menu name="JSON data" action="view -m json" cg="rightEditorMode" isChecked="1"/>
-			<menu name="XML data" action="view -m xml" cg="rightEditorMode"/>
+			<menu name="JSON data" action="right -m json" cg="rightEditorMode" isChecked="1"/>
+			<menu name="XML data" action="right -m xml" cg="rightEditorMode"/>
 		</menu>
 		
 		<menu for="font-size">

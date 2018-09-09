@@ -126,10 +126,17 @@ svg[class*=" symbol-"] {
 				border-radius: 3px 3px 4px 4px;
 				border-top: 2px solid lighten(@boxFace, 7%);
 				
+				.cm-s-emilia { display: block; }
+				.cm-s-felicia { display: none; }
+				
+				&.show-xml {
+					.cm-s-emilia { display: none; }
+					.cm-s-felicia { display: block; }
+				}
+
 				textarea {
 					display: none;
 				}
-				.cm-s-felicia.CodeMirror { display: none; }
 			}
 
 			.tabbar {

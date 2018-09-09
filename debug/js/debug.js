@@ -2,6 +2,12 @@
 @@include('./jquery.js')
 @@include('./defiant.js')
 @@include('./codemirror/codemirror.js')
+
+@@include('./codemirror/addon/foldcode.js')
+@@include('./codemirror/addon/foldgutter.js')
+@@include('./codemirror/addon/brace-fold.js')
+@@include('./codemirror/addon/xml-fold.js')
+
 @@include('./codemirror/xml.js')
 @@include('./codemirror/javascript.js')
 
@@ -18,6 +24,13 @@
 			this.doc = $(document);
 			this.body = $('body');
 
+			// get ledger
+			var str = this.body.find('script[type="debug/xml-ledger"]').text().trim();
+			this.ledger = Defiant.xmlFromString(str);
+
+			// makes sure that new menu items are tagged with ID's
+			this.tagIds(this.ledger);
+
 			// init sub-objects
 			for (var name in this) {
 				if (typeof(this[name].init) === 'function') {
@@ -25,7 +38,8 @@
 				}
 			}
 
-			//this.doEvent('initiate-editors');
+			this.left.editor.focus();
+			this.left.editor.setCursor({line: 7, ch: 27});
 		},
 		doEvent: function(event, el, orgEvent) {
 			var self = debug,
@@ -58,52 +72,20 @@
 
 					cmd = srcEl.attr('href') || srcEl.attr('data-cmd');
 					return self.doEvent(cmd, srcEl, event);
-      			// codemirror events
-      			case 'cursorActivity':
-      				cursor = event.doc.getCursor();
-      				line = event.doc.getLine(cursor.line);
-      				xpath = line.match(/select="(.+?)"/i);
-
-      				self.doEvent('clear-left-markers');
-
-      				if (xpath) {
-						editor = self.xslEditor;
-      					const matchStart = line.indexOf(xpath[1]);
-      					const matchEnd = matchStart + xpath[1].length;
-      					if (matchStart <= cursor.ch && matchEnd >= cursor.ch) {
-							editor.markers.push( editor.markText({line: cursor.line, ch: matchStart}, {line: cursor.line, ch: matchEnd}, {className: 'matched-xpath'}) );
-      						
-      						self.doEvent('highlight-matches', xpath[1]);
-      					}
-      				}
-      				break;
       			// custom events
-				case 'highlight-matches':
-					xpath = el;
-					data = JSON.parse( debug.jsonEditor.doc.getValue() );
-					try {
-						matches = JSON.search(data, xpath);
-						trace = JSON.trace;
-					} catch (err) {
-						return;
-					}
-					
-      				self.doEvent('clear-right-markers');
-					editor = self.jsonEditor;
-
-					trace.map(item => {
-						const lineStart = item[0] - 1;
-						const lineEnd = lineStart + item[1];
-						const lstr = editor.doc.getLine( lineEnd );
-						self.xslEditor.markers.push( editor.markText({line: lineStart, ch: 0}, {line: lineEnd, ch: lstr.length}, {className: 'matched-json'}) );
-					});
+				case 'matches':
 					break;
 			}
+		},
+		tagIds: function(doc) {
+			var leafs = Defiant.node.selectNodes(doc, '//*[@tag_children]//*[not(@mId)]'),
+				now = Date.now();
+			leafs.map((item, i) => item.setAttribute('mId', 'c'+ now + i));
 		},
 		left: @@include('./debug-left.js'),
 		right: @@include('./debug-right.js'),
 		shell: @@include('./debug-shell.js'),
-		contextmenu: @@include('./debug-context.js')
+		context: @@include('./debug-context.js')
 	};
 
 	window.debug = debug;
