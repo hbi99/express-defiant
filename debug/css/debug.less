@@ -133,10 +133,6 @@ svg[class*=" symbol-"] {
 					.cm-s-emilia { display: none; }
 					.cm-s-felicia { display: block; }
 				}
-
-				textarea {
-					display: none;
-				}
 			}
 
 			.tabbar {
@@ -195,11 +191,15 @@ svg[class*=" symbol-"] {
 					margin: 1px 2px 0 0;
 					cursor: pointer;
 
+					&:hover {
+						color: @boxFocusHl;
+					}
+
 					&.btn-gutter {
 						border-radius: 9px 0 0 9px;
 						padding-left: 1px;
 					}
-					&.btn-fontsize {
+					&.btn-locked {
 						border-radius: 0 9px 9px 0;
 						padding-right: 1px;
 					}

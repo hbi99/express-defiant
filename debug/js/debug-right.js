@@ -82,14 +82,21 @@
 		this.jsonEditor.setOption('lineNumbers', !current);
 		this.jsonEditor.setOption('foldGutter', !current);
 		this.jsonEditor.setOption('gutters', current ? [] : this.gOptions);
+		
+		this.xmlEditor.setOption('lineNumbers', !current);
+		this.xmlEditor.setOption('foldGutter', !current);
+		this.xmlEditor.setOption('gutters', current ? [] : this.gOptions);
 
 		this.el.find('.view-foot .btn-gutter')[current ? 'removeClass' : 'addClass']('on');
 		
 		if (current) xMenu.removeAttribute('isChecked');
 		else xMenu.setAttribute('isChecked', '1');
 	},
-	fontSize: function() {
-		
+	locked: function() {
+		var el = this.el.find('.view-foot .btn-locked'),
+			current = el.hasClass('on');
+
+		el[current ? 'removeClass' : 'addClass']('on');
 	},
 	mode: function(mode) {
 		var container = this.el.find('.editor-container'),

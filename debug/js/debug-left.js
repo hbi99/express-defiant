@@ -64,7 +64,10 @@
 		this.editor.setOption('foldGutter', !current);
 		this.editor.setOption('gutters', current ? [] : this.gOptions);
 	},
-	fontSize: function() {
-		
+	locked: function() {
+		var el = this.el.find('.view-foot .btn-locked'),
+			current = el.hasClass('on');
+
+		el[current ? 'removeClass' : 'addClass']('on');
 	}
 }

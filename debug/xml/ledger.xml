@@ -3,11 +3,11 @@
 	<shell>
 		<i object="left" long="debug.left" type="">
 			<i switch="g" name="gutter" arg="[boolean]"/>
-			<i switch="f" name="fontSize" arg="[integer]"/>
+			<i switch="l" name="locked" arg="[boolean]"/>
 		</i>
 		<i object="right" long="debug.right" type="">
 			<i switch="g" name="gutter" arg="[boolean]"/>
-			<i switch="f" name="fontSize" arg="[integer]"/>
+			<i switch="l" name="locked" arg="[boolean]"/>
 			<i switch="m" name="mode" arg="[json|xml]"/>
 		</i>
 	</shell>
