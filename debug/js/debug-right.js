@@ -98,7 +98,7 @@
 
 		el[current ? 'removeClass' : 'addClass']('on');
 	},
-	mode: function(mode) {
+	mode: function() {
 		var container = this.el.find('.editor-container'),
 			isCurrentXml = container.hasClass('show-xml');
 
