@@ -82,6 +82,7 @@
 				now = Date.now();
 			leafs.map((item, i) => item.setAttribute('mId', 'c'+ now + i));
 		},
+		divider: @@include('./debug-divider.js'),
 		left: @@include('./debug-left.js'),
 		right: @@include('./debug-right.js'),
 		shell: @@include('./debug-shell.js'),
