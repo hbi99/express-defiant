@@ -12617,11 +12617,26 @@ CodeMirror.defineMIME("application/typescript", { name: "javascript", typescript
 		left: {
 	gOptions: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
 	init: function() {
-		var self = debug.left;
+		var self = debug.left,
+			textarea = $('section.xslt-view textarea')[0],
+			allXslt = textarea.value,
+			active = allXslt.match(/<!-- ACTIVE: (.+?) -->/i)[1],
+			rx = new RegExp('<!-- START: '+ active +'.xslt? -->([\\s\\S]*?)<!-- END: '+ active +'.xslt? -->', 'mi'),
+			templName;
 
 		this.el = debug.body.find('.xslt-view');
+		this.allXslt = allXslt;
 
-		this.editor = CodeMirror.fromTextArea($('section.xslt-view textarea')[0], {
+		// template contents
+		textarea.value = this.allXslt.match(rx)[1].trim();
+
+		// template name
+		rx = new RegExp('<!-- START: ('+ active +'.xslt?) -->', 'mi');
+		templName = this.allXslt.match(rx)[1].trim();
+		this.el.find('.tabbar .active').html(templName);
+
+
+		this.editor = CodeMirror.fromTextArea(textarea, {
 		        mode: 'text/html',
 				lineWrapping: false,
 				lineNumbers: true,
@@ -12658,6 +12673,8 @@ CodeMirror.defineMIME("application/typescript", { name: "javascript", typescript
   				xpath = [];
   				// clear markers
   				self.doEvent('clear-markers');
+	  			
+	  			if (line.match(/select="(.+?)"/i) === null) return;
 
   				slice = event.doc.getRange({line: 0, ch: 0}, {line: cursor.line-1});
   				slice = slice.replace(/<(.[^(><.)]+)(.+?)?>[\s\S]*?<\/\1>/mig, (match) => {
@@ -13294,32 +13311,11 @@ CodeMirror.defineMIME("application/typescript", { name: "javascript", typescript
 	   <section class="xslt-view">
 	   	<div class="tabbar">
 	   		<span class="active">books.xsl</span>
-	   		<span>categories.xsl</span>
+	   		<!--<span>categories.xsl</span>-->
 	   	</div>
 	      
 	      <div class="editor-container" data-context="left-editor">
-	      	<textarea><xsl:template name="tests">
-   <h1>Tests</h1>
-   
-   <xsl:for-each select="//book">
-      <xsl:value-of select="title"/>
-   </xsl:for-each>
-   
-   <xsl:for-each select="//book">
-      <xsl:value-of select="isbn"/>
-   </xsl:for-each>
-
-   <xsl:value-of select="//book[4]/category_id"/>
-   <xsl:value-of select="//book[last()]"/>
-   <xsl:value-of select="//*[category_id=1]"/>
-   <xsl:value-of select="//*[category_id=3]/title"/>
-   <xsl:value-of select="//book/isbn"/>
-   <xsl:value-of select="//title/text()"/>
-   <xsl:value-of select="//*[price > 15]"/>
-   <xsl:value-of select="//*[contains(title, 'the')]"/>
-   <xsl:value-of select="//book[position() &lt; 3]"/>
-
-</xsl:template></textarea>
+	      	<textarea><!-- XSLT-Placeholder --></textarea>
 	      </div>
 	      
 	      <div class="view-foot">
@@ -13336,53 +13332,7 @@ CodeMirror.defineMIME("application/typescript", { name: "javascript", typescript
 	   	</div>
 
 	      <div class="editor-container" data-context="right-editor">
-		      <textarea name="json-data">{
-   "book": [
-      {
-         "title": "Sword of Honour",
-         "category_id": 1,
-         "author_id": 1,
-         "price": 12.99
-      },
-      {
-         "title": "Moby Dick",
-         "category_id": 1,
-         "author_id": 2,
-         "isbn": "0-553-21311-3",
-         "price": 8.99
-      },
-      {
-         "title": "Sayings of the Century",
-         "category_id": 2,
-         "author_id": 3,
-         "price": 8.95
-      },
-      {
-         "title": "The Lord of the Rings",
-         "category_id": 1,
-         "author_id": 4,
-         "price": 22.99
-      },
-      {
-         "title": "I, robot",
-         "category_id": 3,
-         "author_id": 5,
-         "price": 22.99
-      },
-      {
-         "title": "Foundation and Empire",
-         "category_id": 3,
-         "author_id": 5,
-         "price": 22.99
-      },
-      {
-         "title": "The Hobbit",
-         "category_id": 4,
-         "author_id": 4,
-         "price": 25.50
-      }
-   ]
-}</textarea>
+		      <textarea name="json-data"><!-- JSON-Placeholder --></textarea>
 		      <textarea name="xml-data"></textarea>
 	      </div>
 
@@ -13392,7 +13342,7 @@ CodeMirror.defineMIME("application/typescript", { name: "javascript", typescript
 
 	      	<div class="sel-options" data-menu="right-editor-mode">
 	      		<span class="sel-value">json</span>
-					<svg class="symbol-sort"><use xlink:href="#symbol-sort" /></svg>
+				<svg class="symbol-sort"><use xlink:href="#symbol-sort" /></svg>
 	      	</div>
 	      </div>
 	   </section>
@@ -13404,7 +13354,7 @@ CodeMirror.defineMIME("application/typescript", { name: "javascript", typescript
 		</span>
 		<div class="statusbar">
 			<div class="content">
-				Some text goes here...
+				<!--Some text goes here...-->
 			</div>
 		</div>
 	</div>
