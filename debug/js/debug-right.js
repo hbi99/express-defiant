@@ -30,6 +30,8 @@
 
 		data = Defiant.node.prettyPrint(JSON.toXML(data));
 		this.xmlEditor.doc.setValue(data);
+
+		this.locked();
 	},
 	doEvent: function(event) {
 		var self = debug.right,
@@ -72,9 +74,6 @@
 				break;
 		}
 	},
-	lock: function() {
-		this.jsonEditor.setOption('readOnly', 'nocursor');
-	},
 	gutter: function() {
 		var current = this.jsonEditor.getOption('lineNumbers'),
 			xMenu = Defiant.node.selectSingleNode(debug.ledger, '//menu[@action="right -g"]');
@@ -97,6 +96,7 @@
 			current = el.hasClass('on');
 
 		el[current ? 'removeClass' : 'addClass']('on');
+		this.jsonEditor.setOption('readOnly', current ? '' : 'nocursor');
 	},
 	mode: function() {
 		var container = this.el.find('.editor-container'),

@@ -25,6 +25,8 @@
 	doEvent: function(event) {
 		var self = debug.left,
 			cmd  = (typeof(event) === 'string') ? event : event.type,
+			slice,
+			selects,
 			cursor,
 			line,
 			xpath,
@@ -34,21 +36,34 @@
 		switch(cmd) {
   			// codemirror events
   			case 'cursorActivity':
+				editor = self.editor;
   				cursor = event.doc.getCursor();
   				line = event.doc.getLine(cursor.line);
-  				xpath = line.match(/select="(.+?)"/i);
-
+  				xpath = [];
+  				// clear markers
   				self.doEvent('clear-markers');
 
-  				if (xpath) {
-					editor = self.editor;
-  					const matchStart = line.indexOf(xpath[1]);
-  					const matchEnd = matchStart + xpath[1].length;
+  				slice = event.doc.getRange({line: 0, ch: 0}, {line: cursor.line-1});
+  				slice = slice.replace(/<(.[^(><.)]+)(.+?)?>[\s\S]*?<\/\1>/mig, (match) => {
+  					const nl = match.match(/\n/g);
+  					return nl ? nl.map(i => '\n').join('') : '';
+  				});
+  				slice = slice.replace(/<.+?\/>/mig, '') +'\n'+ line;
+  				selects = slice.split('\n');
+
+				selects.map((item, index) => {
+					if (!item.trim() || item.indexOf(' select="') < 0) return;
+					const select = item.match(/ select="(.+?)"/i)[1];
+  					const matchStart = item.indexOf(select);
+  					const matchEnd = matchStart + select.length;
   					if (matchStart <= cursor.ch && matchEnd >= cursor.ch) {
-						editor.markers.push( editor.markText({line: cursor.line, ch: matchStart}, {line: cursor.line, ch: matchEnd}, {className: 'matched-xpath'}) );
-  						
-  						debug.right.doEvent('highlight-matches', xpath[1]);
-  					}
+						editor.markers.push( editor.markText({line: index, ch: matchStart}, {line: index, ch: matchEnd}, {className: 'matched-xpath'}) );
+					}
+					xpath.push(select);
+				});
+
+  				if (xpath.length) {
+					debug.right.doEvent('highlight-matches', xpath.join('/'));
   				}
   				break;
       		// custom events

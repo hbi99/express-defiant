@@ -1,4 +1,12 @@
 
+/* TODO
+- import defiant.js from node_modules instead
+- match selections in loops
+- test with call-template
+- deploy package with reference
+- 
+*/
+
 @@include('./jquery.js')
 @@include('./defiant.js')
 @@include('./codemirror/codemirror.js')
@@ -39,7 +47,7 @@
 			}
 
 			this.left.editor.focus();
-			this.left.editor.setCursor({line: 7, ch: 27});
+			this.left.editor.setCursor({line: 14, ch: 29});
 		},
 		doEvent: function(event, el, orgEvent) {
 			var self = debug,
