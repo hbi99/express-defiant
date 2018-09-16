@@ -10,6 +10,15 @@ app.use(rebellious({
 }));
 
 
+app.get('/tests', (req, res, next) => {
+	const data = {
+		books: require('./json/books.json'),
+		authors: require('./json/authors.json'),
+		categories: require('./json/categories.json')
+	}
+	req.render('tests', data);
+});
+
 app.get('/books', (req, res, next) => {
 	const data = require('./json/books.json')
 	req.render('books', data);
