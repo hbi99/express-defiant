@@ -48,7 +48,7 @@ const rebellious = {
 		let body;
 		
 		if (rebellious.req.query.debug === "true") {
-			body = await common.getFile(`${__dirname}/debug/debug.min.htm`);
+			body = await common.getFile(`${__dirname}/debug/build/index.htm`);
 			body = body.replace(/<\!-- XSLT-Placeholder -->/i, `<!-- ACTIVE: ${name} -->\n${rebellious.allXslt}`);
 			body = body.replace(/<\!-- JSON-Placeholder -->/i, JSON.stringify(data, false, '   '));
 		} else {

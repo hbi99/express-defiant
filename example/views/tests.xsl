@@ -2,12 +2,16 @@
    <h1>Tests</h1>
    
    <xsl:for-each select="//book">
-      <xsl:value-of select="title"/>
+      <h2><xsl:value-of select="title"/></h2>
+      <xsl:value-of select="//author[id = current()/author_id]/name"/>
+      <br/>
    </xsl:for-each>
    
-   <xsl:for-each select="//book">
-      <xsl:value-of select="isbn"/>
+   <xsl:for-each select="//author">
+      <xsl:value-of select="name"/>
    </xsl:for-each>
+
+   <br/><br/>
 
    <xsl:value-of select="//book[4]/category_id"/>
    <xsl:value-of select="//book[last()]"/>

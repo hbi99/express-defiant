@@ -12,6 +12,7 @@ app.use(rebellious({
 
 app.get('/tests', (req, res, next) => {
 	const data = {
+		//download: require('./json/download.json'),
 		books: require('./json/books.json'),
 		authors: require('./json/authors.json'),
 		categories: require('./json/categories.json')

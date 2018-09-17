@@ -5,28 +5,28 @@
  *
  *-------------------------------------------------------------------------*/
 
-var colors      = require('colors'),
-	gulp        = require('gulp'),
-	$           = require('gulp-load-plugins')(),
-	cleanCSS    = require('gulp-clean-css'),
-	sequence    = require('run-sequence');
+var colors   = require('colors'),
+	gulp     = require('gulp'),
+	$        = require('gulp-load-plugins')(),
+	cleanCSS = require('gulp-clean-css'),
+	del      = require('del');
 
 var include_options = {
 		prefix    : '@@',
 		basepath  : '@file'
 	},
 	srcPaths = {
-		watch   : ['debug/**/*.*', '!debug/**/*.min.*', '!svg-symbols.svg'],
-		html    : ['debug/html/*.{html,htm}'],
+		watch   : ['debug/**/*.*', '!debug/build/**/*.*'],
+		html    : ['debug/index.htm'],
 		scripts : ['debug/js/debug.js', '!debug/js/*.min.js'],
 		styles  : ['debug/css/debug.less'],
 		svg     : ['debug/svg/*.svg', '!debug/svg/svg-symbols.svg']
 	},
 	destPaths = {
-		html   : 'debug/',
-		script : 'debug/js/',
-		styles : 'debug/css/',
-		svg    : 'debug/svg/'
+		html   : 'debug/build/',
+		script : 'debug/build/js/',
+		styles : 'debug/build/css/',
+		svg    : 'debug/build/svg/'
 	},
 	svgOptions = {
 		id       : 'symbol-%f',
@@ -48,63 +48,56 @@ gulp.task('help', (done) => {
 	done();
 });
 
+function clean() {
+	return del(destPaths.html);
+}
 
-
-/*-------------------------------------------------------------------------
- * Declaring tasks
- *
- *-------------------------------------------------------------------------*/
-
-// Processes html files
-gulp.task('html', () => {
-	return gulp.src(srcPaths.html)
-		.pipe($.fileInclude(include_options))
-		.pipe($.rename({suffix: '.min'}))
-		.pipe(gulp.dest(destPaths.html))
-		.pipe($.size({title: 'html'}));
-});
-
-// Processes javascript files
-gulp.task('scripts', () => {
+function scripts() {
 	return gulp.src(srcPaths.scripts)
 		.pipe($.fileInclude(include_options))
 	//	.pipe($.uglifyes())
 		.pipe($.rename({suffix: '.min'}))
 		.pipe(gulp.dest(destPaths.script))
 		.pipe($.size({title: 'scripts'}));
-});
+};
 
-// Processes Less files
-gulp.task('styles', () => {
+function styles() {
 	return gulp.src(srcPaths.styles)
 		.pipe($.less())
 		.pipe(cleanCSS({compatibility: 'ie8'}))
 		.pipe($.rename({suffix: '.min'}))
 		.pipe(gulp.dest(destPaths.styles))
 		.pipe($.size({title: 'styles'}));
-});
+}
 
-// Concat svg files
-gulp.task('svg', () => {
+function svg() {
 	return gulp.src(srcPaths.svg)
 		.pipe($.svgSymbols(svgOptions))
 		.pipe(gulp.dest(destPaths.svg))
 		.pipe($.size({title: 'svg'}));
-});
+}
 
-// Watch source files and moves them accordingly
-gulp.task('watch', () => {
-	gulp.watch(srcPaths.watch, ['build']);
-});
+function html() {
+	return gulp.src(srcPaths.html)
+		.pipe($.fileInclude(include_options))
+		.pipe(gulp.dest(destPaths.html))
+		.pipe($.size({title: 'html'}));
+}
 
-// This task is for building for platforms
-gulp.task('devbuild', (cb) => {
-	sequence(['build'], 'watch', cb);
-});
+function watch() {
+	gulp.watch(srcPaths.watch, build);
+}
 
-// This task is for building for platforms
-gulp.task('build', (cb) => {
-	sequence(['svg', 'scripts', 'styles'], 'html', cb);
-});
+
+var build = gulp.series(gulp.parallel(svg, scripts, styles), html);
+
+gulp.task('clean', clean);
+gulp.task('scripts', scripts);
+gulp.task('styles', styles);
+gulp.task('svg', svg);
+gulp.task('html', html);
+gulp.task('build', build);
+gulp.task('watch', watch);
+
 
 
