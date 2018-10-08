@@ -21,7 +21,7 @@ app.get('/tests', (req, res, next) => {
 });
 
 app.get('/books', (req, res, next) => {
-	const data = require('./json/books.json')
+	const data = require('./json/books2.json')
 	req.render('books', data);
 });
 

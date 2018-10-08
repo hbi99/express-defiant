@@ -1,0 +1,40 @@
+{
+   "book": [
+      {
+         "title": "Sword of Honour",
+         "category": "Fiction",
+         "price": 12.99
+      },
+      {
+         "title": "Moby Dick",
+         "category": "Fiction",
+         "isbn": "0-553-21311-3",
+         "price": 8.99
+      },
+      {
+         "title": "Sayings of the Century",
+         "category": "Reference",
+         "price": 8.95
+      },
+      {
+         "title": "The Lord of the Rings",
+         "category": "Fiction",
+         "price": 22.99
+      },
+      {
+         "title": "I, robot",
+         "category": "Science Fiction",
+         "price": 22.99
+      },
+      {
+         "title": "Foundation and Empire",
+         "category": "Science Fiction",
+         "price": 22.99
+      },
+      {
+         "title": "The Hobbit",
+         "category": "Fantasy",
+         "price": 25.50
+      }
+   ]
+}

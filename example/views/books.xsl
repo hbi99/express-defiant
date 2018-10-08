@@ -1,7 +1,11 @@
 <xsl:template name="books">
-	<h1>Books</h1>
+    <h1>Books</h1>
    
    <xsl:for-each select="//book">
-      <xsl:value-of select="title"/><br/>
+        <p>
+            <b><xsl:value-of select="title"/></b><br/>
+            <xsl:value-of select="category"/>
+        <p>
    </xsl:for-each>
+
 </xsl:template>

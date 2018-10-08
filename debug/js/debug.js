@@ -47,7 +47,7 @@
 			}
 
 			this.left.editor.focus();
-			this.left.editor.setCursor({line: 14, ch: 29});
+			this.left.editor.setCursor({line: 18, ch: 29});
 		},
 		doEvent: function(event, el, orgEvent) {
 			var self = debug,

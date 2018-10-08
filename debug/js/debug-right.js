@@ -28,20 +28,24 @@
 		var data = JSON.parse( this.jsonEditor.doc.getValue() );
 		this.snapshot = Defiant.getSnapshot(data);
 
-		data = Defiant.node.prettyPrint(JSON.toXML(data));
+		this.xmlDoc = JSON.toXML(data);
+		data = Defiant.node.prettyPrint(this.xmlDoc);
 		this.xmlEditor.doc.setValue(data);
 
 		this.locked();
+		//this.mode();
 	},
 	doEvent: function(event) {
 		var self = debug.right,
 			cmd  = (typeof(event) === 'string') ? event : event.type,
+			el,
 			cursor,
 			line,
 			xpath,
 			editor,
 			matches,
 			trace,
+			docText,
 			data;
 		
 		//console.log(cmd);
@@ -54,6 +58,47 @@
 				self.xmlEditor.markers = [];
 				break;
 			case 'highlight-matches':
+				el = self.el.find('.editor-container');
+				xpath = arguments[1];
+				if (el.hasClass('show-xml')) {
+					self.doEvent('highlight-xml-matches', xpath);
+				} else {
+					self.doEvent('highlight-json-matches', xpath);
+				}
+				break;
+			case 'highlight-xml-matches':
+				xpath = arguments[1];
+				editor = self.xmlEditor;
+  				self.doEvent('clear-markers');
+
+  				docText = Defiant.node.prettyPrint(self.xmlDoc).replace(/\n {1,}/mg, '\n');
+				matches = Defiant.node.selectNodes(self.xmlDoc, xpath)
+
+				matches.map(item => {
+					let node = '';
+					let cIndex = 0;
+
+					switch (item.nodeType) {
+						case 1: // type: node
+							node = Defiant.node.prettyPrint(item)
+										.replace(/\n {1,}/mg, '\n')
+										.replace(/ xmlns:d="defiant-namespace"/, '');
+							cIndex = docText.indexOf(node);
+							break;
+						case 2: // type: attribute
+							break;
+						case 3: // type: text
+							break;
+						case 9: // type: text
+							break;
+					}
+					const lineStart = docText.slice(0, cIndex).split('\n').length - 1;
+					const lineEnd = lineStart + node.split('\n').length - 1;
+					const lstr = editor.doc.getLine( lineEnd );
+					editor.markers.push( editor.markText({line: lineStart, ch: 0}, {line: lineEnd, ch: lstr.length}, {className: 'matched-xml'}) );
+				});
+				break;
+			case 'highlight-json-matches':
 				xpath = arguments[1];
 				editor = self.jsonEditor;
   				self.doEvent('clear-markers');
